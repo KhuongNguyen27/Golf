@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/stylesheets/theme-dark.min.css') }}" data-skin="dark">
     <link rel="stylesheet" href="{{ asset('admin/assets/stylesheets/custom.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script>
     var skin = localStorage.getItem('skin') || 'default';
     var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
@@ -62,6 +63,7 @@
     </div>
 
     yield('footer')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('admin/assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/popper.js/umd/popper.min.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -71,6 +73,7 @@
     <script src="{{ asset('admin/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
     <script src="{{ asset('admin/assets/javascript/theme.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendor/js/src/app.js') }}"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
     <script>

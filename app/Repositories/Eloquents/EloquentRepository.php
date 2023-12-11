@@ -14,12 +14,12 @@ abstract class EloquentRepository implements RepositoryInterface {
     {
         $this->model = app()->make($this->getModel());
     }
-    public function all($request=[])
+    public function all()
     {
         $result = $this->model->all();
         return $result;
     }
-    public function paginate($limit,$request=[])
+    public function paginate($limit)
     {
         $items = $this->model->paginate($limit);
         return $items;

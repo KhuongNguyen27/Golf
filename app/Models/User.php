@@ -11,7 +11,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +18,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'code',
+        'birthday',
+        'phone'
     ];
 
     /**
@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //Relationship
+    function package_user(){
+        return $this->hasMany(PackageUser::class);
+    }
+    function packages(){
+        return $this->belongsToMany(Package::class,'package_user');
+    }
 }
