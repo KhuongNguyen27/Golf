@@ -15,21 +15,21 @@ class DurationSeeder extends Seeder
     {
         $datas = 
         [
-            // [
-            //     'name' => "30 ngày",
-            //     'amount' => "30",
-            //     'unit' => "day",
-            // ],
-            // [
-            //     'name' => "35 ngày",
-            //     'amount' => "35",
-            //     'unit' => "day",
-            // ],
-            // [
-            //     'name' => "35 giờ",
-            //     'amount' => "35",
-            //     'unit' => "hour",
-            // ],
+            [
+                'name' => "30 ngày",
+                'amount' => "30",
+                'unit' => "day",
+            ],
+            [
+                'name' => "35 ngày",
+                'amount' => "35",
+                'unit' => "day",
+            ],
+            [
+                'name' => "35 giờ",
+                'amount' => "35",
+                'unit' => "hour",
+            ],
             [
                 'name' => "80 ngày",
                 'amount' => "80",

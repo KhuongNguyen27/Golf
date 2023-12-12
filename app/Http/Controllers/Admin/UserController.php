@@ -8,9 +8,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Eloquents\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\UploadFileTrait;
+use Illuminate\Support\Str;
 
 class UserController extends AdminController
 {
+    use UploadFileTrait;
     protected $userService;
     public function __construct(UserRepository $userService)
     {
@@ -32,6 +35,11 @@ class UserController extends AdminController
         try {
             $data = $request->except(['_method','_token']);
             $data['code'] = 'L'.rand(1,100);
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $this->uploadFile($request->file('avatar'), 'uploads/'.$data['code'].'/users');
+            }else {
+                $data['avatar'] = 'assets/images/favicon.png';
+            }
             $item = $this->userService->store($data);
             return redirect()->route('admin.users.index')->with('success','Thêm thành công');
         } catch (Exception $e) {
@@ -48,7 +56,11 @@ class UserController extends AdminController
     }
     function update(UpdateUserRequest $request,String $id){
         try {
+            $user = $this->userService->find($id);
             $data = $request->except(['_method','_token']);
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $this->uploadFile($request->file('avatar'), 'uploads/'.$user->code.'/users');
+            }
             $item = $this->userService->update($data,$id);
             return redirect()->route('admin.users.index')->with('success','Cập nhập thành công');
         } catch (Exception $e) {

@@ -47,8 +47,11 @@
                     </thead>
                     <tbody>
                         @foreach($items as $item)
-                        <tr onclick="window.location='{{ route('admin.packages.show', $item->id) }}'">
-                            <td>{{ $item->name }}</td>
+                        <tr>
+                            <td>
+                                <a href="{{ route('admin.packages.show', $item->id) }}">{{ $item->name }}</a>
+                                </a>
+                            </td>
                             <td>{{ number_format(intval($item->price), 0, ',', '.') }} VNĐ</td>
                             <td>{{ $item->duration_name }}</td>
                             <td>{!! $item->status_fm !!}</td>

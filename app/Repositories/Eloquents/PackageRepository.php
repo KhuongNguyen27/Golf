@@ -7,6 +7,7 @@ use App\Models\Package;
 use App\Models\PackageUser;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 class PackageRepository extends EloquentRepository implements PackageRepositoryInterface
 {
     public function getModel()
@@ -34,7 +35,6 @@ class PackageRepository extends EloquentRepository implements PackageRepositoryI
             $result->expiration_date = Carbon::today()->addDays(intval($package->duration_amount))->format("Y-m-d");
             $result->user_id = $data['user_id'];
             $result->rank_id = 1;
-            $result->hour_on_day = "";
             $result->status  = 1;
             $result->save();
             return $result;

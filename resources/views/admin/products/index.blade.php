@@ -9,9 +9,9 @@
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý Thành Viên</h1>
+        <h1 class="page-title mr-sm-auto">Quản Lý Sản Phẩm</h1>
         <div class="btn-toolbar">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary mr-2" title="Thêm mới thành viên">
+            <a href="{{ route('admin.products.create') }}" class="btn btn-primary mr-2" title="Thêm mới sản phẩm">
                 <i class="fa-solid bx bx-plus"></i>
                 <span class="ml-1">Thêm Mới</span>
             </a>
@@ -20,6 +20,16 @@
 </header>
 <div class="page-section">
     <div class="card card-fluid">
+        @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -28,45 +38,32 @@
             </ul>
         </div>
         <div class="card-body">
-            @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
-            @endif
-            @if (session('error'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('error') }}
-            </div>
-            @endif
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Tên</th>
-                            <th>Mã thành viên</th>
-                            <th>Ngày sinh</th>
-                            <th>Số điện thoại</th>
+                            <th>Tên sản phẩm</th>
+                            <!-- <th>Số lượng</th> -->
+                            <th>Giảm giá</th>
+                            <th>Giá tiền</th>
+                            <th>Trạng thái</th>
                             <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($items as $item)
                         <tr>
-                            <td>
-                                <a href="#" class="tile tile-img mr-1">
-                                    <img class="img-fluid rounded-circle" src="{{ asset($item->avatar) }}" alt="">
-                                </a>
-                                {{ $item->name }}
-                            </td>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->birthday)->format('d/m/Y') }}</td>
-                            <td>{{ $item->phone }}</td>
+                            <td>{{ $item->name }}</td>
+                            <!-- <td>{{ $item->quantity }}</td> -->
+                            <td>{{ $item->discount_fm }}</td>
+                            <td>{{ $item->price_fm }}</td>
+                            <td>{!! $item->status_fm !!}</td>
                             <td>
                                 <span class="sr-only">Edit</span></a> <a
-                                    href="{{ route('admin.users.edit', $item->id) }}"
+                                    href="{{ route('admin.products.edit', $item->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Chỉnh sửa thành viên"><i
                                         class='bx bx-edit-alt'></i></a>
-                                <form action="{{ route('admin.users.destroy', $item->id) }}" style="display:inline"
+                                <form action="{{ route('admin.products.destroy', $item->id) }}" style="display:inline"
                                     method="post">
                                     @csrf
                                     @method('delete')

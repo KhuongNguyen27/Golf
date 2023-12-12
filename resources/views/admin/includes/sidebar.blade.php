@@ -10,7 +10,11 @@
                         class="menu-icon bx bx-library"></span>
                     <span class="menu-text">Quản lí gói</span></a>
             </li>
-
+            <li class="menu-item has-child">
+                <a href="{{ route('admin.products.index') }}" class="menu-link"><span
+                        class="menu-icon bx bx-cricket-ball"></span>
+                    <span class="menu-text">Quản lí sản phẩm</span></a>
+            </li>
         </ul>
     </nav>
 </div>

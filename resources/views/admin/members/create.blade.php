@@ -35,6 +35,12 @@
                         class="form-control" id="" placeholder="Nhập số điện thoại">
                     <small id="" class="form-text text-muted"></small>
                 </div>
+                <div class="form-group">
+                    <label for="tf1">Ảnh đại điện</label>
+                    <input name="avatar" type="file" class="form-control" id="avatar_input">
+                    <small id="" class="form-text text-muted"></small>
+                </div>
+
                 <div class="form-actions">
                     <a class="btn btn-secondary float-right" href="{{ route('admin.users.index') }}">Hủy</a>
                     <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
@@ -43,4 +49,7 @@
         </div>
     </form>
 </div>
+@endsection
+@section('footer')
+
 @endsection

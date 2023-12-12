@@ -38,6 +38,15 @@
                         placeholder="Nhập số điện thoại">
                     <small id="" class="form-text text-muted"></small>
                 </div>
+                <div class="form-group">
+                    <label for="tf1">Ảnh đại điện</label>
+                    <input name="avatar" type="file" class="form-control" id="avatar_input">
+                    <small id="" class="form-text text-muted"></small>
+                    <div class="img-thumbnail">
+                        <img id="avatar_preview" src="{{ asset($item->avatar) }}" class="w-25 rounded-circle"
+                            alt="Preview Image" />
+                    </div>
+                </div>
                 <div class="form-actions">
                     <a class="btn btn-secondary float-right" href="{{ route('admin.users.index') }}">Hủy</a>
                     <button class="btn btn-primary ml-auto" type="submit">Lưu</button>

@@ -15,6 +15,9 @@ class RankSeeder extends Seeder
         $datas = 
         [
             [
+                'name' => "Bạc",
+            ],
+            [
                 'name' => "Vàng",
             ],
             [
