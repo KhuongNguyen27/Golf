@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
-            $table->text('total');
-            $table->text('note');
+            $table->text('total')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -51,4 +51,7 @@ class User extends Authenticatable
     function packages(){
         return $this->belongsToMany(Package::class,'package_user');
     }
+    function order(){
+        return $this->hasMany(Order::class);
+    }
 }
