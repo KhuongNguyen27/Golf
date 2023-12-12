@@ -18,7 +18,7 @@
                 </g>
             </svg></a>
     </div>
-    <div class="top-bar-list">
+    <!-- <div class="top-bar-list">
         <div class="top-bar-item top-bar-item-full">
             <form class="top-bar-search">
                 <div class="input-group input-group-search dropdown">
@@ -51,5 +51,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
