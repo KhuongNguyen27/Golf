@@ -64,7 +64,7 @@
                                 <a href="{{ route('admin.userproducts.create',['user_id' => $item->id, 'package_id' => $package->id]) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
                                         class='bx bx-plus'></i></a>
-                                <a href="{{ route('admin.userproducts.showuser',['user_id' => $item->id, 'package_id' => $package->id]) }}"
+                                <a href="{{ route('admin.userproducts.show',['user_id' => $item->id, 'package_id' => $package->id]) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
                                         class='bx bx-bullseye'></i></a>
                             </td>

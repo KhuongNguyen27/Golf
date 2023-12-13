@@ -11,6 +11,9 @@ use App\Repositories\Eloquents\ProductRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends AdminController
 {

@@ -4,7 +4,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ URL::previous() }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại </a>
+                <a href="{{ route('admin.users.index') }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại
+                </a>
             </li>
         </ol>
     </nav>

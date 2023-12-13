@@ -26,6 +26,9 @@ class Package extends Model
     function users(){
         return $this->belongsToMany(User::class,'package_user');
     }
+    function package_product(){
+        return $this->hasMany(PackageProduct::class);
+    }
 
     //Feature 
     const ACTIVE = 1;

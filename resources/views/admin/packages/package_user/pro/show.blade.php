@@ -4,18 +4,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="#"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Trang Chủ </a>
+                <a href="{{ url()->previous() }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
+                    Lại</a>
             </li>
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý Thành Viên</h1>
-        <div class="btn-toolbar">
-            <a href="{{ route('admin.users.create') }}" class="btn btn-primary mr-2" title="Thêm mới thành viên">
-                <i class="fa-solid bx bx-plus"></i>
-                <span class="ml-1">Thêm Mới</span>
-            </a>
-        </div>
+        <h1 class="page-title mr-sm-auto">Quản Lý Lịch Sử Thành Viên </h1>
     </div>
 </header>
 <div class="page-section">
@@ -42,35 +37,25 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Tên</th>
-                            <th>Mã thành viên</th>
-                            <th>Ngày sinh</th>
-                            <th>Số điện thoại</th>
-                            <th>Chức năng</th>
+                            <th>Ngày sử dụng</th>
+                            <th>Số lượng</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($items as $item)
                         <tr>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
+                            <td>{{ $item->balls }} bóng</td>
                             <td>
-                                <a href="#" class="tile tile-img mr-1">
-                                    <img class="img-fluid rounded-circle" src="{{ asset($item->avatar) }}" alt="">
-                                </a>
-                                {{ $item->name }}
-                            </td>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->birthday)->format('d/m/Y') }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>
-                                <span class="sr-only">Edit</span></a> <a
-                                    href="{{ route('admin.users.edit', $item->id) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Chỉnh sửa thành viên"><i
+                                <a href="{{ route('admin.userproducts.edit',$item->id) }}"
+                                    class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
                                         class='bx bx-edit-alt'></i></a>
-                                <form action="{{ route('admin.users.destroy', $item->id) }}" style="display:inline"
-                                    method="post">
+                                <form action="{{ route('admin.userproducts.destroy', $item->id) }}"
+                                    style="display:inline" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button onclick="return confirm('Xóa {{ $item->name }} ?')"
+                                    <button onclick="return confirm('Xóa lịch sử ?')"
                                         class="btn btn-sm btn-icon btn-secondary" title="Xóa thành viên"><i
                                             class='bx bx-trash'></i></button>
                                 </form>

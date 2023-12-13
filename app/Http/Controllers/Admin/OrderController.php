@@ -12,6 +12,9 @@ use App\Repositories\Eloquents\OrderRepository;
 use App\Repositories\Eloquents\UserRepository;
 use App\Repositories\Eloquents\ProductRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends AdminController
 {

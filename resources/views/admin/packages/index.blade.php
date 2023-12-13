@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ URL::previous() }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
+                <a href="#"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Trang Chủ</a>
             </li>
         </ol>
     </nav>
@@ -57,7 +57,7 @@
                             <td>{!! $item->status_fm !!}</td>
                             <td>
                                 <a href="{{ route('admin.packages.show', $item->id) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Chỉnh sửa thành viên"><i
+                                    class="btn btn-sm btn-icon btn-secondary" title="Xem thành viên"><i
                                         class='bx bx-group'></i></a>
                             </td>
                         </tr>

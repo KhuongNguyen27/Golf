@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Eloquents\PackageRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
 
 class PackageController extends AdminController
 {
