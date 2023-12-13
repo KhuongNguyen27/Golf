@@ -40,7 +40,7 @@ class PackageRepository extends EloquentRepository implements PackageRepositoryI
             return $result;
         } catch (Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return back()->error($e->getMassage());
+            return back()->with('error','Thêm gói thất bại');
         }
     }
 }

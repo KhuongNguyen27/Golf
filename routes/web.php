@@ -24,6 +24,10 @@ Route::prefix('admin')->group(function () {
     //Orders
     Route::resource('orders', 'App\Http\Controllers\Admin\OrderController')->names('admin.orders');
     
+    //Order Detail
+    Route::get('orderdetails/create/{order_id}', [App\Http\Controllers\Admin\OrderDetailController::class, 'create'])->name('admin.orderdetails.create');
+    Route::resource('orderdetails', 'App\Http\Controllers\Admin\OrderDetailController')->names('admin.orderdetails');
+    
     //Packages
     Route::get('/packages/create/{id}', [App\Http\Controllers\Admin\PackageController::class,'create'])->name('admin.packages.create');
     Route::resource('packages', 'App\Http\Controllers\Admin\PackageController')->names('admin.packages');

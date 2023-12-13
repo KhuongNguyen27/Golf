@@ -31,4 +31,7 @@ class Order extends Model
     function getUserNameAttribute(){
         return $this->user ? $this->user->name : "";
     }
+    function getTotalFmAttribute(){
+        return $this->total ? number_format(intval($this->total), 0, ',', '.').' VNĐ' : '';
+    }
 }

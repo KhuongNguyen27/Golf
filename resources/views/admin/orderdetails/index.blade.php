@@ -54,11 +54,11 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->user_name }}</td>
-                            <td>{{ $item->total_fm }}</td>
+                            <td>{{ $item->total }}</td>
                             <td>{{ $item->note }}</td>
                             <td>
                                 <span class="sr-only">Add Detail</span></a> <a
-                                    href="{{ route('admin.orderdetails.create',[ 'order_id' => $item->id]) }}"
+                                    href="{{ route('admin.orderdetail.create', $item->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm sản phẩm"><i
                                         class='bx bx-plus'></i></a>
                                 <span class="sr-only">Edit</span></a> <a

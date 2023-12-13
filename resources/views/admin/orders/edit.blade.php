@@ -36,6 +36,9 @@
                     <label for="tf1">Ghi chú</label>
                     <textarea name="note" class="form-control">{{old('note')?old('note'):$item->note}}</textarea>
                     <small id="" class="form-text text-muted"></small>
+                    @error('note')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
                 </div>
                 <div class="form-actions">
                     <a class="btn btn-secondary float-right" href="{{ route('admin.orders.index') }}">Hủy</a>

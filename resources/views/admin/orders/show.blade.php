@@ -9,12 +9,12 @@
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý Đơn Hàng</h1>
+        <h1 class="page-title mr-sm-auto">Quản Lý Chi Tiết Đơn Hàng</h1>
         <div class="btn-toolbar">
-            <a href="{{ route('admin.orders.create') }}" class="btn btn-primary mr-2" title="Thêm mới đơn hàng">
+            <!-- <a href="{{ route('admin.orders.create') }}" class="btn btn-primary mr-2" title="Thêm mới đơn hàng">
                 <i class="fa-solid bx bx-plus"></i>
                 <span class="ml-1">Thêm Mới</span>
-            </a>
+            </a> -->
         </div>
     </div>
 </header>
@@ -42,41 +42,37 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Mã đơn hàng</th>
-                            <th>Khách Hàng</th>
+                            <th colspan="6" class='text-left'><b class='fw-normal'>Mã đơn hàng :
+                                    {{$item->id}}</br>Note : {{$item->note}}</b></th>
+                        </tr>
+                        <tr class="table-primary">
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá Tiền</th>
                             <th>Tổng Tiền</th>
-                            <th>Ghi Chú</th>
-                            <th>Chức năng</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($items as $item)
+                        @foreach($item->orderdetail as $orderdetail)
                         <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->user_name }}</td>
-                            <td>{{ $item->total_fm }}</td>
-                            <td>{{ $item->note }}</td>
+                            <td>{{ $orderdetail->product_name }}</td>
+                            <td>{{ $orderdetail->quantity }}</td>
+                            <td>{{ $orderdetail->price_fm }}</td>
+                            <td>{{ $orderdetail->total_fm }}</td>
                             <td>
-                                <span class="sr-only">Add Detail</span></a> <a
-                                    href="{{ route('admin.orderdetails.create',[ 'order_id' => $item->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Thêm sản phẩm"><i
-                                        class='bx bx-plus'></i></a>
                                 <span class="sr-only">Edit</span></a> <a
-                                    href="{{ route('admin.orders.edit', $item->id) }}"
+                                    href="{{ route('admin.orderdetails.edit', $orderdetail->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Chỉnh sửa đơn hàng"><i
                                         class='bx bx-edit-alt'></i></a>
-                                <span class="sr-only">Show</span></a> <a
-                                    href="{{ route('admin.orders.show', $item->id) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Chi tiết đơn hàng"><i
-                                        class='bx bx-bullseye'></i></a>
-                                <!-- <form action="{{ route('admin.orders.destroy', $item->id) }}" style="display:inline"
-                                    method="post">
+                                <form action="{{ route('admin.orderdetails.destroy', $orderdetail->id) }}"
+                                    style="display:inline" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button onclick="return confirm('Xóa {{ $item->name }} ?')"
+                                    <button onclick="return confirm('Xóa {{ $orderdetail->name }} ?')"
                                         class="btn btn-sm btn-icon btn-secondary" title="Xóa đơn hàng"><i
                                             class='bx bx-trash'></i></button>
-                                </form> -->
+                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -10,16 +10,19 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Eloquents\OrderRepository;
 use App\Repositories\Eloquents\UserRepository;
+use App\Repositories\Eloquents\ProductRepository;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends AdminController
 {
     protected $orderService;
     protected $userService;
-    public function __construct(OrderRepository $orderService,UserRepository $userService)
+    protected $productService;
+    public function __construct(OrderRepository $orderService,UserRepository $userService,ProductRepository $productService)
     {
         $this->orderService = $orderService;
         $this->userService = $userService;
+        $this->productService = $productService;
     }   
     public function index(Request $request)
     {
@@ -32,8 +35,10 @@ class OrderController extends AdminController
     }
     function create(){
         $users = $this->userService->all();
+        $products = $this->productService->all();
         $param = [
-            'users' => $users
+            'users' => $users,
+            'products' => $products
         ];
         return view('admin.orders.create',$param);
     }
@@ -76,6 +81,17 @@ class OrderController extends AdminController
             Log::error('Bug error : '.$e->getMessage());
             return redirect()->route('admin.orders.create')->with('error','Vui lòng thử lại');
         }
-        
+    }
+    function show(String $id){
+        try {
+            $item = $this->orderService->show($id);
+            $param = [
+                'item' => $item
+            ];
+            return view('admin.orders.show',$param);
+        } catch (Exception $e) {
+            Log::error('Bug error : '.$e->getMessage());
+            return redirect()->route('admin.orders.index')->with('error','Vui lòng thử lại');
+        }
     }
 }

@@ -8,29 +8,15 @@
             </li>
         </ol>
     </nav>
-    <h1 class="page-title">Thêm Đơn Hàng</h1>
+    <h1 class="page-title">Thêm Chi Tiết Đơn Hàng</h1>
 </header>
 <div class="page-section">
-    <form method="post" action="{{ route('admin.orders.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('admin.orderdetails.store') }}" enctype="multipart/form-data">
         @csrf
+        <input class='form-control' style="color:red" value="{{ $order_id }}" name="order_id" type="hidden">
         <div class="card">
             <div class="card-body">
                 <legend>Thông tin cơ bản</legend>
-                <div class="form-group">
-                    <label for="tf1">Tên Thành Viên <abbr name="Trường bắt buộc">*</abbr></label>
-                    <select name="user_id" class="form-control mt-2">
-                        <option value="">Chọn khách hàng...</option>
-                        @foreach($users as $user)
-                        <option value="{{ $user->id }}" {{ (old('user_id') == $user->id) ? 'selected' : '' }}>
-                            {{ $user->name }}
-                        </option>
-                        @endforeach
-                    </select>
-                    <small id="" class="form-text text-muted"></small>
-                    @error('user_id')
-                    <input class='form-control' style="color:red" value="{{ $message }}">
-                    @enderror
-                </div>
                 <div class="form-group">
                     <label for="tf1">Tên sản phẩm <abbr name="Trường bắt buộc">*</abbr></label>
                     <select name="product_id" class="form-control mt-2">
@@ -55,12 +41,6 @@
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="tf1">Ghi chú</label>
-                    <textarea name="note" class="form-control">{{old('notes')}}</textarea>
-                    <small id="" class="form-text text-muted"></small>
-                </div>
-
                 <div class="form-actions">
                     <a class="btn btn-secondary float-right" href="{{ route('admin.orders.index') }}">Hủy</a>
                     <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
