@@ -19,6 +19,16 @@
     </div>
 </header>
 <div class="page-section">
+    @if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if (session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
     <div class="card card-fluid">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -28,16 +38,6 @@
             </ul>
         </div>
         <div class="card-body">
-            @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
-            @endif
-            @if (session('error'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('error') }}
-            </div>
-            @endif
             <div class="table-responsive">
                 <table class="table">
                     <thead>

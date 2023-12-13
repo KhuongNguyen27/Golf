@@ -9,12 +9,12 @@
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý Sản Phẩm</h1>
+        <h1 class="page-title mr-sm-auto">Quản Lý Chi Tiết Đơn Hàng</h1>
         <div class="btn-toolbar">
-            <a href="{{ route('admin.products.create') }}" class="btn btn-primary mr-2" title="Thêm mới sản phẩm">
+            <!-- <a href="{{ route('admin.orders.create') }}" class="btn btn-primary mr-2" title="Thêm mới đơn hàng">
                 <i class="fa-solid bx bx-plus"></i>
                 <span class="ml-1">Thêm Mới</span>
-            </a>
+            </a> -->
         </div>
     </div>
 </header>
@@ -42,33 +42,35 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Tên sản phẩm</th>
-                            <!-- <th>Số lượng</th> -->
-                            <th>Giảm giá</th>
-                            <th>Giá tiền</th>
-                            <th>Trạng thái</th>
-                            <th>Chức năng</th>
+                            <th colspan="6" class='text-left'><b class='fw-normal'>Mã đơn hàng :
+                                    {{$item->id}}</br>Note : {{$item->note}}</b></th>
+                        </tr>
+                        <tr class="table-primary">
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá Tiền</th>
+                            <th>Tổng Tiền</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($items as $item)
+                        @foreach($item->orderdetail as $orderdetail)
                         <tr>
-                            <td>{{ $item->name }}</td>
-                            <!-- <td>{{ $item->quantity }}</td> -->
-                            <td>{{ $item->discount_fm }}</td>
-                            <td>{{ $item->price_fm }}</td>
-                            <td>{!! $item->status_fm !!}</td>
+                            <td>{{ $orderdetail->product_name }}</td>
+                            <td>{{ $orderdetail->quantity }}</td>
+                            <td>{{ $orderdetail->price_fm }}</td>
+                            <td>{{ $orderdetail->total_fm }}</td>
                             <td>
                                 <span class="sr-only">Edit</span></a> <a
-                                    href="{{ route('admin.products.edit', $item->id) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Chỉnh sửa thành viên"><i
+                                    href="{{ route('admin.orderdetails.edit', $orderdetail->id) }}"
+                                    class="btn btn-sm btn-icon btn-secondary" title="Chỉnh sửa đơn hàng"><i
                                         class='bx bx-edit-alt'></i></a>
-                                <form action="{{ route('admin.products.destroy', $item->id) }}" style="display:inline"
-                                    method="post">
+                                <form action="{{ route('admin.orderdetails.destroy', $orderdetail->id) }}"
+                                    style="display:inline" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button onclick="return confirm('Xóa {{ $item->name }} ?')"
-                                        class="btn btn-sm btn-icon btn-secondary" title="Xóa thành viên"><i
+                                    <button onclick="return confirm('Xóa {{ $orderdetail->name }} ?')"
+                                        class="btn btn-sm btn-icon btn-secondary" title="Xóa đơn hàng"><i
                                             class='bx bx-trash'></i></button>
                                 </form>
                             </td>
