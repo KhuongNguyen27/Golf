@@ -31,12 +31,15 @@ Route::prefix('admin')->group(function () {
     //Package User
     Route::get('/userproducts/create/{user_id}/{package_id}', [App\Http\Controllers\Admin\UserProductController::class,'create'])->name('admin.userproducts.create');
     Route::get('/userproducts/create3d/{user_id}/{package_id}', [App\Http\Controllers\Admin\UserProductController::class,'create3d'])->name('admin.userproducts.create3d');
-
     Route::get('/userproducts/showuser/{user_id}/{package_id}', [App\Http\Controllers\Admin\UserProductController::class,'show'])->name('admin.userproducts.showuser');
+    
+    // Expiration 1 day
+    Route::post('packageusers/expiration', [App\Http\Controllers\Admin\PackageUserController::class,'expiration'])->name('admin.packageusers.expiration');
     
     // Show package single
     Route::get('userproducts/edit3d/{id}', [App\Http\Controllers\Admin\UserProductController::class,'edit3d'])->name('admin.userproducts.edit3d');
     
+    // User Product
     Route::resource('userproducts', 'App\Http\Controllers\Admin\UserProductController')->names('admin.userproducts');
     
 

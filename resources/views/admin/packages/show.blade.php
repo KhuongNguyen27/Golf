@@ -70,11 +70,22 @@
                             <td>{!! $item->status_fm !!}</td>
                             <td>
                                 <a href="{{ route('admin.userproducts.create',['user_id' => $item->user_id, 'package_id' => $package->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
-                                        class='bx bx-plus'></i></a>
+                                class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
+                                class='bx bx-plus'></i></a>
                                 <a href="{{ route('admin.userproducts.showuser',['user_id' => $item->user_id, 'package_id' => $package->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
-                                        class='bx bx-bullseye'></i></a>
+                                class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
+                                class='bx bx-bullseye'></i></a>
+                                @if($item->package_id != 4)
+                                <form action="{{ route('admin.packageusers.expiration') }}"
+                                    style="display:inline" method="post">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $item->user_id }}">
+                                    <input type="hidden" name="package_id" value="{{ $item->package_id }}">
+                                    <button onclick="return confirm('Gia hạn thêm 1 ngày cho thành viên {{ $item->user_name }} ?')"
+                                        class="btn btn-sm btn-icon btn-secondary" title="Gia hạn thành viên"><i
+                                            class='bx bx-plus'></i></button>
+                                </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
