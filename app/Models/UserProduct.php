@@ -13,9 +13,9 @@ class UserProduct extends Model
         'user_id',
         'package_id',
         'balls',
-        'hour_to_hour',
-        'hour_on_day',
-        'hour_total',
+        'hour_to',
+        'to_hour',
+        'total_hour',
     ];
     //Relationship
     function user(){

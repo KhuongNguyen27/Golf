@@ -22,14 +22,15 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.userproducts.create3D',['user_id' => $id, 'package_id' => $package_id ]) }}">3D</a>
+                        href="{{ route('admin.userproducts.create3d',['user_id' => $id, 'package_id' => $package_id ]) }}">3D</a>
                 </li>
             </ul>
         </div>
-        <form method="post" action="{{ route('admin.userproducts.storeSingle') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.userproducts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <input type="hidden" name="user_id" value="{{$id}}">
+                <input type="hidden" name="package_id" value="{{$package_id}}">
                 <input type="hidden" name="is_3d" value="false">
                 <div class="form-group">
                     <label for="tf1">Số lượng bóng<abbr name="Trường bắt buộc">*</abbr></label> <input name="balls"

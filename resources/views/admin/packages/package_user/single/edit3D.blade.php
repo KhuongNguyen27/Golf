@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                <a href="{{ route('admin.userproducts.showuser',[$item->user_id,$item->package_id]) }}"><i
                         class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
             </li>
         </ol>
@@ -20,15 +20,14 @@
                 </li>
             </ul>
         </div>
-        <form method="post" action="{{ route('admin.userproducts.updateSingle') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.userproducts.update',$item->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <input type="hidden" name="is_3d" value ="true">
             <div class="card-body">
-                <input type="hidden" name="user_id" value="{{$id}}">
-                <input type="hidden" name="is_3d" value="true">
                 <div class="form-group">
                     <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="number"
-                        value="{{ old('hour_to') }}" class="form-control" id="" placeholder="Nhập giờ vào">
+                        value="{{ old('hour_to') ? old('hour_to') : $item->hour_to   }}" class="form-control" id="" placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
                     @error('hour_to')
                     <input class='form-control' style="color:red" value="{{ $message }}">
@@ -36,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tf1">Đến<abbr name="Trường bắt buộc">*</abbr></label> <input name="to_hour"
-                        type="number" value="{{ old('to_hour') }}" class="form-control" id=""
+                        type="number" value="{{ old('to_hour') ? old('to_hour') : $item->to_hour  }}" class="form-control" id=""
                         placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
                     @error('to_hour')
