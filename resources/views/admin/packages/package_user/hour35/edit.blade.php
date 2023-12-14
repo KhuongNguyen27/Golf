@@ -4,46 +4,48 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ URL::previous() }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
+                <a href="{{ route('admin.userproducts.showuser',[$item->user_id,$item->package_id]) }}"><i
+                        class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
             </li>
         </ol>
     </nav>
-    <h1 class="page-title">Cập Nhập Thành Viên</h1>
+    <h1 class="page-title">Thêm Chi Tiết</h1>
 </header>
 <div class="page-section">
-    <form method="post" action="{{ route('admin.users.update',$item->id) }}" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div class="card">
+    <div class="card card-fluid">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="">3D</a>
+                </li>
+            </ul>
+        </div>
+        <form method="post" action="{{ route('admin.userproducts.update',$item->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="is_3d" value ="true">
             <div class="card-body">
-                <legend>Thông tin cơ bản</legend>
                 <div class="form-group">
-                    <label for="tf1">Tên Thành Viên <abbr name="Trường bắt buộc">*</abbr></label> <input name="name"
-                        type="text" value="{{ old('name')? old('name') : $item->name }}" class="form-control" id=""
-                        placeholder="Nhập tên thành viên">
+                    <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="number"
+                        value="{{ old('hour_to') ? old('hour_to') : $item->hour_to   }}" class="form-control" id="" placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
-                    @error('name')
+                    @error('hour_to')
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="tf1">Ngày Sinh</label> <input name="birthday" type="date"
-                        value="{{ old('birthday')? old('birthday') : $item->birthday }}" class="form-control" id=""
-                        placeholder="Nhập ngày sinh">
+                    <label for="tf1">Đến<abbr name="Trường bắt buộc">*</abbr></label> <input name="to_hour"
+                        type="number" value="{{ old('to_hour') ? old('to_hour') : $item->to_hour  }}" class="form-control" id=""
+                        placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
+                    @error('to_hour')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
                 </div>
-                <div class="form-group">
-                    <label for="tf1">Số Điện Thoại</label> <input name="phone" type="text"
-                        value="{{ old('phone')? old('phone') : $item->phone }}" class="form-control" id=""
-                        placeholder="Nhập số điện thoại">
-                    <small id="" class="form-text text-muted"></small>
+                <div class="float-right mt-2">
+                    <button type="submit" class="btn btn-primary">Hoàn Thành</button>
                 </div>
-                <div class="form-actions">
-                    <a class="btn btn-secondary float-right" href="{{ route('admin.users.index') }}">Hủy</a>
-                    <button class="btn btn-primary ml-auto" type="submit">Lưu</button>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 @endsection

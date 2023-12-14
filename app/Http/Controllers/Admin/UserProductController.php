@@ -50,7 +50,7 @@ class UserProductController extends AdminController
             }
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.index')->with('error','Vui lòng thử lại');
+            return redirect()->route('admin.packages.show',$id)->with('error','Vui lòng thử lại');
         }
     }
     function store(Request $request){
