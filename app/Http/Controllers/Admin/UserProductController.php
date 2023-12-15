@@ -50,55 +50,19 @@ class UserProductController extends AdminController
             }
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.index')->with('error','Vui lòng thử lại');
+            return redirect()->route('admin.packages.show',$id)->with('error','Vui lòng thử lại');
         }
     }
-    function storePro(Request $request){
+    function store(Request $request){
         try {
             $data = $request->except('_method','_token');
-            $data['package_id'] = 1;
+            $package_id = $request->package_id;
+            $user_id = $request->user_id;
             $this->productService->store($data);
-            return redirect()->route('admin.packages.show',1)->with('error','Thêm thành công');
+            return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Thêm thành công');
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',1)->with('error','Thêm thất bại');
-        }
-    }
-    function storeSingle(Request $request){
-        try {
-            $data = $request->except('_method','_token');
-            $data['package_id'] = 2;
-            if ($data['is_3d']=="false") {
-                $this->productService->store($data);
-            }else{
-                $this->productService->store35($data);
-            }
-            return redirect()->route('admin.packages.show',2)->with('error','Thêm thành công');
-        } catch (\Exception $e) {
-            Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',2)->with('error','Thêm thất bại');
-        }
-    }
-    function store10(Request $request){
-        try {
-            $data = $request->except('_method','_token');
-            $data['package_id'] = 3;
-            $this->productService->store($data);
-            return redirect()->route('admin.packages.show',3)->with('error','Thêm thành công');
-        } catch (\Exception $e) {
-            Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',3)->with('error','Thêm thất bại');
-        }
-    }
-    function store35(Request $request){
-        try {
-            $data = $request->except('_method','_token');
-            $data['package_id'] = 4;
-            $this->productService->store35($data);
-            return redirect()->route('admin.packages.show',4)->with('error','Thêm thành công');
-        } catch (\Exception $e) {
-            Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',4)->with('error','Thêm thất bại');
+            return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Thêm thất bại');
         }
     }
 
@@ -108,22 +72,28 @@ class UserProductController extends AdminController
             $user_id = $request->user_id;
             $is_3D = $request->is_3D;
             $items = $this->productService->show($package_id, $user_id);
+            $param=[
+                'package_id' => $package_id,
+                'user_id' => $user_id,
+                'is_3D' => $is_3D,
+                'items' => $items,
+            ];
             switch ($package_id) {
                 case 1 :
-                    return view('admin.packages.package_user.pro.show',compact('items'));
+                    return view('admin.packages.package_user.pro.show',$param);
                     break;
                 case 2 :
                     if ($is_3D) {
-                        return view('admin.packages.package_user.single.show3D',compact('items'));
+                        return view('admin.packages.package_user.single.show3D',$param);
                     }else{
-                        return view('admin.packages.package_user.single.show',compact('items'));
+                        return view('admin.packages.package_user.single.show',$param);
                     }
                     break;
                 case 3 :
-                    return view('admin.packages.package_user.session10.show',compact('items'));
+                    return view('admin.packages.package_user.session10.show',$param);
                     break;
                 case 4 :
-                    return view('admin.packages.package_user.hour35.show',compact('items'));
+                    return view('admin.packages.package_user.hour35.show',$param);
                     break;
             }
         } catch (\Exception $e) {
@@ -135,34 +105,54 @@ class UserProductController extends AdminController
         try {
             $item = $this->productService->find($id);
             $package_id = $item->package_id;
+            $user_id = $item->user_id;
+            $param=[
+                'item' => $item
+            ];
             switch ($package_id) {
                 case 1 :
-                    return view('admin.packages.package_user.pro.edit',compact('item'));
+                    return view('admin.packages.package_user.pro.edit',$param);
                     break;
                 case 2 :
-                    return view('admin.packages.package_user.single.edit',compact('item'));
+                    return view('admin.packages.package_user.single.edit',$param);
                     break;
                 case 3 :
-                    return view('admin.packages.package_user.session10.edit',compact('item'));
+                    return view('admin.packages.package_user.session10.edit',$param);
                     break;
                 case 4 :
-                    return view('admin.packages.package_user.hour35.edit',compact('item'));
+                    return view('admin.packages.package_user.hour35.edit',$param);
                     break;
             }
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',3)->with('error','Vui lòng thử lại');
+            return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Vui lòng thử lại');
+        }
+    }
+    function edit3d($id){
+        try {
+            $item = $this->productService->find($id);
+            $package_id = $item->package_id;
+            $user_id = $item->user_id;
+            $param=[
+                'item' => $item
+            ];
+            return view('admin.packages.package_user.single.edit3D',$param);
+        } catch (\Exception $e) {
+            Log::error('Bug error : '.$e->getMessage());
+            return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Vui lòng thử lại');
         }
     }
     function update(Request $request,String $id){
         try {
-            $data = $request->except('_method','_token');
-            $productUser = $this->productService->find($id);
-            $this->productService->update($data,$id);      
-            return redirect()->route('admin.userproducts.showuser',['user_id' => $productUser->user_id, 'package_id' => $productUser->package_id])->with('success','Cập nhập thành công');
-        } catch (\Exception $e) {
+            $item = $this->productService->find($id);
+            $package_id = $item->package_id;
+            $user_id = $item->user_id;
+            $data = $request->except(['_method','_token']);
+            $item = $this->productService->update($data,$id);
+            return redirect()->route('admin.userproducts.showuser',['user_id' => $user_id,'package_id' => $package_id])->with('success','Cập nhập thành công');
+        } catch (Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return back()->with('error','Cập nhập thất bại');
+            return redirect()->route('admin.userproducts.showuser',['user_id' => $user_id,'package_id' => $package_id])->with('error','Cập nhập thất bại');
         }
     }
     function destroy($id){

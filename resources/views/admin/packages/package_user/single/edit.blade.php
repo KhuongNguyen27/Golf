@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                <a href="{{ route('admin.userproducts.showuser',[$item->user_id,$item->package_id]) }}"><i
                         class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
@@ -22,13 +22,12 @@
                 </li>
             </ul>
         </div>
-        <form method="post" action="{{ route('admin.userproducts.updateSingle') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.userproducts.update',$item->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="card-body">
-                <input type="hidden" name="user_id" value="{{$id}}">
-                <input type="hidden" name="is_3d" value="false">
-                <div class="form-group">
+            <input type="hidden" name="is_3d" value ="false">
+            <div class="form-group">
                     <label for="tf1">Số lượng bóng<abbr name="Trường bắt buộc">*</abbr></label> <input name="balls"
                         type="number" value="{{ old('balls')? old('balls') : $item->balls }}" class="form-control" id=""
                         placeholder="Nhập số lượng bóng">

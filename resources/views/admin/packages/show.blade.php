@@ -47,6 +47,10 @@
                             <th>Tên thành viên</th>
                             <th>Ngày đăng kí</th>
                             <th>Ngày hết hạn</th>
+                            <th>Lần sử dụng</th>
+                            @if($package->id == 2 || $package->id == 4)
+                            <th>Thời gian sử dụng</th>
+                            @endif
                             <th>Xếp hạng</th>
                             <th>Trạng thái</th>
                             <th>Thao tác</th>
@@ -58,15 +62,30 @@
                             <td>{{ $item->user_name }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->register_day)->format('d/m/Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->expiration_date)->format('d/m/Y') }}</td>
+                            <td>{{ $item->used_numbers }}</td>
+                            @if($package->id == 2 || $package->id == 4)
+                            <td>{{ $item->total_hour }}</td>
+                            @endif
                             <td>{{ $item->rank_name }}</td>
                             <td>{!! $item->status_fm !!}</td>
                             <td>
-                                <a href="{{ route('admin.userproducts.create',['user_id' => $item->id, 'package_id' => $package->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
-                                        class='bx bx-plus'></i></a>
-                                <a href="{{ route('admin.userproducts.showuser',['user_id' => $item->id, 'package_id' => $package->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
-                                        class='bx bx-bullseye'></i></a>
+                                <a href="{{ route('admin.userproducts.create',['user_id' => $item->user_id, 'package_id' => $package->id]) }}"
+                                class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
+                                class='bx bx-plus'></i></a>
+                                <a href="{{ route('admin.userproducts.showuser',['user_id' => $item->user_id, 'package_id' => $package->id]) }}"
+                                class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
+                                class='bx bx-bullseye'></i></a>
+                                @if($item->package_id != 4)
+                                <form action="{{ route('admin.packageusers.expiration') }}"
+                                    style="display:inline" method="post">
+                                    @csrf
+                                    <input type="hidden" name="user_id" value="{{ $item->user_id }}">
+                                    <input type="hidden" name="package_id" value="{{ $item->package_id }}">
+                                    <button onclick="return confirm('Gia hạn thêm 1 ngày cho thành viên {{ $item->user_name }} ?')"
+                                        class="btn btn-sm btn-icon btn-secondary" title="Gia hạn thành viên"><i
+                                            class='bx bx-plus'></i></button>
+                                </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

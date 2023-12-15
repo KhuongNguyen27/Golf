@@ -4,20 +4,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.index') }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
+                <a href="{{ route('admin.packages.show',$package_id) }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý {{ $package->name }}</h1>
-        <div class="btn-toolbar">
-            <a href="{{ route('admin.packages.create',['id' => $package->id]) }}" class="btn btn-primary mr-2"
-                title="Thêm mới thành viên">
-                <i class="fa-solid bx bx-plus"></i>
-                <span class="ml-1">Thêm Mới</span>
-            </a>
-        </div>
+        <h1 class="page-title mr-sm-auto">Quản Lý Lịch Sử Thành Viên </h1>
     </div>
 </header>
 <div class="page-section">
@@ -44,29 +37,28 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Tên thành viên</th>
-                            <th>Ngày đăng kí</th>
-                            <th>Ngày hết hạn</th>
-                            <th>Xếp hạng</th>
-                            <th>Trạng thái</th>
+                            <th>Ngày sử dụng</th>
+                            <th>Số lượng</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($items as $item)
                         <tr>
-                            <td>{{ $item->user_name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->register_day)->format('d/m/Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->expiration_date)->format('d/m/Y') }}</td>
-                            <td>{{ $item->rank_name }}</td>
-                            <td>{!! $item->status_fm !!}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
+                            <td>{{ $item->balls }} bóng</td>
                             <td>
-                                <a href="{{ route('admin.userproducts.create',['user_id' => $item->id, 'package_id' => $package->id]) }}"
+                                <a href="{{ route('admin.userproducts.edit',$item->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
-                                        class='bx bx-plus'></i></a>
-                                <a href="{{ route('admin.userproducts.show',['user_id' => $item->id, 'package_id' => $package->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
-                                        class='bx bx-bullseye'></i></a>
+                                        class='bx bx-edit-alt'></i></a>
+                                <form action="{{ route('admin.userproducts.destroy', $item->id) }}"
+                                    style="display:inline" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button onclick="return confirm('Xóa lịch sử ?')"
+                                        class="btn btn-sm btn-icon btn-secondary" title="Xóa thành viên"><i
+                                            class='bx bx-trash'></i></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

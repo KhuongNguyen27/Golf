@@ -7,6 +7,8 @@ use App\Models\Package;
 use App\Models\PackageUser;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DateTime;
+use DateInterval;
 
 class PackageRepository extends EloquentRepository implements PackageRepositoryInterface
 {
@@ -28,15 +30,23 @@ class PackageRepository extends EloquentRepository implements PackageRepositoryI
     {
         try {
             $package = Package::with('duration')->findOrfail($data['package_id']);
-            $result = new PackageUser();
-            $result->package_id = $data['package_id'];
-            $result->register_day = date("Y-m-d");
-            $result->activity_day = date("Y-m-d");
-            $result->expiration_date = Carbon::today()->addDays(intval($package->duration_amount))->format("Y-m-d");
-            $result->user_id = $data['user_id'];
-            $result->rank_id = 1;
-            $result->status  = 1;
-            $result->save();
+            $result = PackageUser::where('user_id',$data['user_id'])->where('package_id',$data['package_id'])->first();
+            if ($result) {
+                $expirationDate = DateTime::createFromFormat('Y-m-d', $result->expiration_date);
+                $expirationDate->add(new DateInterval('P30D'));
+                $result->expiration_date = $expirationDate->format('Y-m-d');
+                $result->save();
+            }else {
+                $result = new PackageUser();
+                $result->package_id = $data['package_id'];
+                $result->register_day = date("Y-m-d");
+                $result->activity_day = date("Y-m-d");
+                $result->expiration_date = Carbon::today()->addDays(intval($package->duration_amount))->format("Y-m-d");
+                $result->user_id = $data['user_id'];
+                $result->rank_id = 1;
+                $result->status  = 1;
+                $result->save();
+            }
             return $result;
         } catch (Exception $e) {
             Log::error('Bug error : '.$e->getMessage());

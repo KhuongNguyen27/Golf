@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ url()->previous() }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
+                <a href="{{ route('admin.packages.show',$package_id) }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
         </ol>
@@ -41,8 +41,9 @@
                     <thead>
                         <tr>
                             <th>Ngày sử dụng</th>
-                            <th>Thời gian sử dụng </th>
-                            <th>Tổng thời gian</th>
+                            <th>Từ (Giờ)</th>
+                            <th>Đến (Giờ)</th>
+                            <th>Tổng thời gian(Giờ)</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -51,10 +52,11 @@
                         @if($item->balls == '')
                         <tr>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
-                            <td>{{ $item->hour_to_hour }}</td>
-                            <td>{{ $item->hour_on_day }}</td>
+                            <td>{{ $item->hour_to }}</td>
+                            <td>{{ $item->to_hour }}</td>
+                            <td>{{ $item->to_hour - $item->hour_to }}</td>
                             <td>
-                                <a href="{{ route('admin.userproducts.edit',$item->id) }}"
+                                <a href="{{ route('admin.userproducts.edit3d',['id' =>$item->id] ) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
                                         class='bx bx-edit-alt'></i></a>
                                 <form action="{{ route('admin.userproducts.destroy', $item->id) }}"

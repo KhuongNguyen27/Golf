@@ -32,12 +32,11 @@ class PackageController extends AdminController
     public function show(String $id){
         $items = $this->packageService->show($id);
         $package = $this->packageService->find($id);
-        // dd($items);
         $param = [
             'items' => $items,
             'package' => $package
-    ];
-    return view('admin.packages.show', $param);
+        ];
+        return view('admin.packages.show', $param);
     }
     function create(Request $request){
         $users = User::all();

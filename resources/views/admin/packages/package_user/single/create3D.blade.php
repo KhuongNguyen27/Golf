@@ -25,10 +25,11 @@
                 </li>
             </ul>
         </div>
-        <form method="post" action="{{ route('admin.userproducts.storeSingle') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('admin.userproducts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <input type="hidden" name="user_id" value="{{$id}}">
+                <input type="hidden" name="package_id" value="{{$package_id}}">
                 <input type="hidden" name="is_3d" value="true">
                 <div class="form-group">
                     <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="number"

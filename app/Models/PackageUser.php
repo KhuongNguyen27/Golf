@@ -16,7 +16,8 @@ class PackageUser extends Model
         'expiration_date',
         'user_id',
         'rank_id',
-        'hour_on_day',
+        'total_hour',
+        'used_numbers',
         'status'
     ];
 
