@@ -41,6 +41,15 @@
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="tf1">Ngày sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input name="created_at"
+                        type="date" value="{{ old('created_at') }}" class="form-control" id=""
+                        placeholder="Nhập ngày sử dụng">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('created_at')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
                 <div class="float-right mt-2">
                     <button type="submit" class="btn btn-primary">Hoàn Thành</button>
                 </div>

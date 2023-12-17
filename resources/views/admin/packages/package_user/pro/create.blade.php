@@ -4,7 +4,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
+                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                        class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
             </li>
         </ol>
     </nav>
@@ -24,6 +25,15 @@
                         placeholder="Nhập số lượng bóng">
                     <small id="" class="form-text text-muted"></small>
                     @error('balls')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tf1">Ngày sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input name="created_at"
+                        type="date" value="{{ old('created_at') }}" class="form-control" id=""
+                        placeholder="Nhập ngày sử dụng">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('created_at')
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>

@@ -4,7 +4,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
+                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                        class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
         </ol>
@@ -51,7 +52,7 @@
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
                             <td>{{ $item->hour_to }}</td>
                             <td>{{ $item->to_hour }}</td>
-                            <td>{{ $item->to_hour - $item->hour_to }}</td>
+                            <td>{{ $item->total_hour }}</td>
                             <td>
                                 <a href="{{ route('admin.userproducts.edit3d',['id' =>$item->id] ) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
