@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::prefix('admin')->group(function () {
-    
+Route::group(['prefix'=>'admin','middleware' => 'preventhistory'],function(){
     //Products
     Route::resource('products', 'App\Http\Controllers\Admin\ProductController')->names('admin.products');
 
