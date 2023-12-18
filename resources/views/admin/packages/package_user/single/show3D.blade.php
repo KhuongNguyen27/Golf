@@ -34,6 +34,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="">3D</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.expirations.show',$item->id) }}">Gia Hạn</a>
+                </li>
             </ul>
         </div>
         <div class="card-body">

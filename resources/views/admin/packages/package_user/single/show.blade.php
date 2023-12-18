@@ -4,7 +4,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
+                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                        class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
         </ol>
@@ -32,6 +33,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?is_3D=true">3D</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.expirations.show',$item->id) }}">Gia Hạn</a>
                 </li>
             </ul>
         </div>

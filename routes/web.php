@@ -32,7 +32,12 @@ Route::group(['prefix'=>'admin','middleware' => 'preventhistory'],function(){
     Route::get('/userproducts/showuser/{user_id}/{package_id}', [App\Http\Controllers\Admin\UserProductController::class,'show'])->name('admin.userproducts.showuser');
     
     // Expiration 1 day
-    Route::post('packageusers/expiration', [App\Http\Controllers\Admin\PackageUserController::class,'expiration'])->name('admin.packageusers.expiration');
+    Route::get('/expirations/create/{id}', [App\Http\Controllers\Admin\ExpirationController::class,'create'])->name('admin.expirations.create');
+    Route::post('/expirations/store', [App\Http\Controllers\Admin\ExpirationController::class,'store'])->name('admin.expirations.store');
+    Route::get('/expirations/{packageuser_id}', [App\Http\Controllers\Admin\ExpirationController::class,'show'])->name('admin.expirations.show');
+    Route::get('/expirations/edit/{id}', [App\Http\Controllers\Admin\ExpirationController::class,'edit'])->name('admin.expirations.edit');
+    Route::put('/expirations/update/{id}', [App\Http\Controllers\Admin\ExpirationController::class,'update'])->name('admin.expirations.update');
+    Route::delete('/expirations/destroy/{id}', [App\Http\Controllers\Admin\ExpirationController::class,'destroy'])->name('admin.expirations.destroy');
     
     // Show package single
     Route::get('userproducts/edit3d/{id}', [App\Http\Controllers\Admin\UserProductController::class,'edit3d'])->name('admin.userproducts.edit3d');
