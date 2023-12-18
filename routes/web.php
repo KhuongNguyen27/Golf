@@ -49,4 +49,7 @@ Route::group(['prefix'=>'admin','middleware' => 'preventhistory'],function(){
     //Packages
     Route::get('/packages/create/{id}', [App\Http\Controllers\Admin\PackageController::class,'create'])->name('admin.packages.create');
     Route::resource('packages', 'App\Http\Controllers\Admin\PackageController')->names('admin.packages');
+
+    //PDF
+    Route::get('/pdf/create/{id}',[App\Http\Controllers\Admin\PdfController::class,'create'])->name('admin.pdf.create');
 });
