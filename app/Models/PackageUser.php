@@ -31,6 +31,9 @@ class PackageUser extends Model
     function user(){
         return $this->belongsTo(User::class);
     }
+    function expiration(){
+        return $this->hasMany(Expiration::class,'packageuser_id','id');
+    }
 
     //Feature
     const ACTIVE = 1;

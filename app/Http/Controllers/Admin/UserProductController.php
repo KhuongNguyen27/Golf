@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\UserProduct;
+use App\Models\PackageUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\Eloquents\UserProductRepository;
+use App\Repositories\Eloquents\PackageUserRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
@@ -13,9 +15,11 @@ use Illuminate\Support\Facades\Log;
 class UserProductController extends AdminController
 {
     protected $productService;
-    public function __construct(UserProductRepository $productService)
+    protected $packageuserService;
+    public function __construct(UserProductRepository $productService,PackageUserRepository $packageuserService)
     {
         $this->productService = $productService;
+        $this->packageuserService = $packageuserService;
     }
     function create3D(Request $request){
         $package_id = $request->package_id;
@@ -71,12 +75,14 @@ class UserProductController extends AdminController
             $package_id = $request->package_id;
             $user_id = $request->user_id;
             $is_3D = $request->is_3D;
+            $item = PackageUser::where('user_id',$user_id)->where('package_id',$package_id)->first();
             $items = $this->productService->show($package_id, $user_id);
             $param=[
                 'package_id' => $package_id,
                 'user_id' => $user_id,
                 'is_3D' => $is_3D,
                 'items' => $items,
+                'item' => $item,
             ];
             switch ($package_id) {
                 case 1 :

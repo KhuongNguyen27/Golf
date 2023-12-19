@@ -13,14 +13,5 @@ class PackageUserController extends AdminController
     {
         $this->packageuserService = $packageuserService;
     }   
-    function expiration(Request $request){
-        try {
-            $data = $request->except('_method','_token');
-            $this->packageuserService->expiration($data);
-            return back()->with('Success','Gia hạn thành công');
-        } catch (Exception $e) {
-            Log::error("Bug error : ".$e->getMessage());
-            return back()->with('error','Vui lòng thử lại');
-        }
-    }
+    
 }

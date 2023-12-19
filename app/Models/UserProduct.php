@@ -16,6 +16,7 @@ class UserProduct extends Model
         'hour_to',
         'to_hour',
         'total_hour',
+        'created_at',
     ];
     //Relationship
     function user(){

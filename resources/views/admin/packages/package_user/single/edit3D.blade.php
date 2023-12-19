@@ -23,22 +23,42 @@
         <form method="post" action="{{ route('admin.userproducts.update',$item->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <input type="hidden" name="is_3d" value ="true">
+            <input type="hidden" name="is_3d" value="true">
             <div class="card-body">
                 <div class="form-group">
-                    <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="number"
-                        value="{{ old('hour_to') ? old('hour_to') : $item->hour_to   }}" class="form-control" id="" placeholder="Nhập giờ vào">
+                    <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="text"
+                        value="{{ old('hour_to') ? old('hour_to') : $item->hour_to   }}" class="form-control" id=""
+                        placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
                     @error('hour_to')
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="tf1">Đến<abbr name="Trường bắt buộc">*</abbr></label> <input name="to_hour"
-                        type="number" value="{{ old('to_hour') ? old('to_hour') : $item->to_hour  }}" class="form-control" id=""
+                    <label for="tf1">Đến<abbr name="Trường bắt buộc">*</abbr></label> <input name="to_hour" type="text"
+                        value="{{ old('to_hour') ? old('to_hour') : $item->to_hour  }}" class="form-control" id=""
                         placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
                     @error('to_hour')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tf1">Tổng giờ sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input
+                        name="total_hour" type="text"
+                        value="{{ old('total_hour') ? old('total_hour') : $item->total_hour }}" class="form-control"
+                        id="" placeholder="Nhập tổng số giờ">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('total_hour')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tf1">Ngày sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input name="created_at"
+                        type="date" value="{{ old('created_at') ? old('created_at') : $item->created_at  }}"
+                        class="form-control" id="" placeholder="Nhập ngày sử dụng">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('created_at')
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>

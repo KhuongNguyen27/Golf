@@ -4,20 +4,14 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                <a href="{{ route('admin.packages.show',$item->package_id) }}"><i
                         class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý Lịch Sử Thành Viên </h1>
-        <div class="btn-toolbar">
-            <a href="{{ route('admin.pdf.create',$item->id) }}" class="btn btn-primary mr-2" title="Xuất file PDF">
-                <i class="fa-solid bx bx-plus"></i>
-                <span class="ml-1">Xuất PDF</span>
-            </a>
-        </div>
+        <h1 class="page-title mr-sm-auto">Quản Lý Gia Hạn Thành Viên </h1>
     </div>
 </header>
 <div class="page-section">
@@ -35,13 +29,12 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="">Ngoài trời</a>
+                    <a class="nav-link "
+                        href="{{ route('admin.userproducts.showuser',['user_id' => $item->user_id, 'package_id' => $item->package_id]) }}">Tất
+                        Cả</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?is_3D=true">3D</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.expirations.show',$item->id) }}">Gia Hạn</a>
+                    <a class="nav-link active">Gia hạn</a>
                 </li>
             </ul>
         </div>
@@ -50,32 +43,30 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Ngày sử dụng</th>
-                            <th>Số lượng</th>
+                            <th>Ngày gia hạn</th>
+                            <th>Lí do</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($items as $item)
-                        @if($item->balls)
                         <tr>
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
-                            <td>{{ $item->balls }} bóng</td>
+                            <td>{{ \Carbon\Carbon::parse($item->expiration_date)->format('d/m/Y') }}</td>
+                            <td>{{ $item->description }}</td>
                             <td>
-                                <a href="{{ route('admin.userproducts.edit',$item->id) }}"
+                                <a href="{{ route('admin.expirations.edit',['id' =>$item->id] ) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
                                         class='bx bx-edit-alt'></i></a>
-                                <form action="{{ route('admin.userproducts.destroy', $item->id) }}"
+                                <form action="{{ route('admin.expirations.destroy', $item->id) }}"
                                     style="display:inline" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button onclick="return confirm('Xóa lịch sử ?')"
-                                        class="btn btn-sm btn-icon btn-secondary" title="Xóa thành viên"><i
+                                    <button onclick="return confirm('Xóa gia hạn?')"
+                                        class="btn btn-sm btn-icon btn-secondary" title="Xóa gia hạn"><i
                                             class='bx bx-trash'></i></button>
                                 </form>
                             </td>
                         </tr>
-                        @endif
                         @endforeach
                     </tbody>
                 </table>

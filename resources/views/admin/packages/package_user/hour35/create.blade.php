@@ -27,7 +27,7 @@
                 <input type="hidden" name="package_id" value="{{$package_id}}">
                 <input type="hidden" name="is_3d" value="true">
                 <div class="form-group">
-                    <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="number"
+                    <label for="tf1">Từ<abbr name="Trường bắt buộc">*</abbr></label> <input name="hour_to" type="text"
                         value="{{ old('hour_to') }}" class="form-control" id="" placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
                     @error('hour_to')
@@ -35,11 +35,28 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="tf1">Đến<abbr name="Trường bắt buộc">*</abbr></label> <input name="to_hour"
-                        type="number" value="{{ old('to_hour') }}" class="form-control" id=""
-                        placeholder="Nhập giờ vào">
+                    <label for="tf1">Đến<abbr name="Trường bắt buộc">*</abbr></label> <input name="to_hour" type="text"
+                        value="{{ old('to_hour') }}" class="form-control" id="" placeholder="Nhập giờ vào">
                     <small id="" class="form-text text-muted"></small>
                     @error('to_hour')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tf1">Tổng giờ sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input
+                        name="total_hour" type="text" value="{{ old('total_hour') }}" class="form-control" id=""
+                        placeholder="Nhập tổng số giờ">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('total_hour')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tf1">Ngày sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input name="created_at"
+                        type="date" value="{{ old('created_at') }}" class="form-control" id=""
+                        placeholder="Nhập ngày sử dụng">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('created_at')
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>

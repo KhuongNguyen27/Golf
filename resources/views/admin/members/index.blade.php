@@ -43,7 +43,6 @@
                     <thead>
                         <tr>
                             <th>Tên</th>
-                            <th>Mã thành viên</th>
                             <th>Ngày sinh</th>
                             <th>Số điện thoại</th>
                             <th>Chức năng</th>
@@ -58,8 +57,7 @@
                                 </a>
                                 {{ $item->name }}
                             </td>
-                            <td>{{ $item->code }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->birthday)->format('d/m/Y') }}</td>
+                            <td>{{ $item->birthday }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>
                                 <span class="sr-only">Edit</span></a> <a

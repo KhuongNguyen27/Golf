@@ -19,10 +19,19 @@
                 <legend>Thông tin cơ bản</legend>
                 <div class="form-group">
                     <label for="tf1">Số lượng bóng <abbr name="Trường bắt buộc">*</abbr></label> <input name="balls"
-                        type="text" value="{{ old('balls')? old('balls') : $item->balls }}" class="form-control" id=""
+                        type="number" value="{{ old('balls')? old('balls') : $item->balls }}" class="form-control" id=""
                         placeholder="Nhập Số lượng bóng">
                     <small id="" class="form-text text-muted"></small>
                     @error('balls')
+                    <input class='form-control' style="color:red" value="{{ $message }}">
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tf1">Ngày sử dụng<abbr name="Trường bắt buộc">*</abbr></label> <input name="created_at"
+                        type="date" value="{{ old('created_at')? old('created_at') : $item->created_at }}"
+                        class="form-control" id="" placeholder="Nhập ngày sử dụng">
+                    <small id="" class="form-text text-muted"></small>
+                    @error('created_at')
                     <input class='form-control' style="color:red" value="{{ $message }}">
                     @enderror
                 </div>

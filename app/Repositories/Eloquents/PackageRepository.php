@@ -23,7 +23,7 @@ class PackageRepository extends EloquentRepository implements PackageRepositoryI
     }
     public function show($id)
     {
-        $result = PackageUser::where('package_id',$id)->with('package','user','rank')->get();
+        $result = PackageUser::where('package_id',$id)->with('package','user','rank')->withCount('expiration')->get();
         return $result;
     }
     public function store($data)

@@ -4,23 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Starter Template | Looper - Bootstrap 4 Admin Theme </title>
-    <script type="application/ld+json">
-    {
-        "name": "Looper - Bootstrap 4 Admin Theme",
-        "description": "Responsive admin theme build on top of Bootstrap 4",
-        "author": {
-            "@type": "Person",
-            "name": "Beni Arisandi"
-        },
-        "@type": "WebSite",
-        "url": "",
-        "headline": "Starter Template",
-        "@context": "http://schema.org"
-    }
-    </script>
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('admin/assets/apple-touch-icon.png') }}">
-    <link rel="shortcut icon" href="{{ asset('admin/assets/favicon.ico') }}">
+    <title> Golf is Life | Manager Member </title>
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('admin/assets/defaul.png') }}">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/defaul.png') }}">
     <meta name="theme-color" content="#3063A0">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css') }}">

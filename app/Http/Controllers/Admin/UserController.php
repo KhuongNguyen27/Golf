@@ -41,7 +41,7 @@ class UserController extends AdminController
             if ($request->hasFile('avatar')) {
                 $data['avatar'] = $this->uploadFile($request->file('avatar'), 'uploads/'.$data['code'].'/users');
             }else {
-                $data['avatar'] = 'assets/images/favicon.png';
+                $data['avatar'] = 'admin/assets/defaul.png';
             }
             $item = $this->userService->store($data);
             return redirect()->route('admin.users.index')->with('success','Thêm thành công');
