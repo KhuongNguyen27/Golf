@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Repositories\Eloquents\ExpirationRepository;
 use App\Repositories\Eloquents\PackageUserRepository;
+use App\Http\Requests\StoreExpirationRequest;
+use App\Http\Requests\UpdateExpirationRequest;
 
 class ExpirationController extends AdminController
 {
@@ -27,7 +29,7 @@ class ExpirationController extends AdminController
             return back()->with('error','Vui lòng thử lại');
         }
     }
-    function store(Request $request){
+    function store(StoreExpirationRequest $request){
         try {
             $data = $request->except('_method','_token');
             $item = $this->packageuserService->find($data['packageuser_id']);
@@ -60,7 +62,7 @@ class ExpirationController extends AdminController
             return back()->with('error','Vui lòng thử lại');
         }
     }
-    function update(Request $request,$id){
+    function update(UpdateExpirationRequest $request,$id){
         try {
             $data = $request->except('_method','_token');
             $item = $this->expirationService->find($id);

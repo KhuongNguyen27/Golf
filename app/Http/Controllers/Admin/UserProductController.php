@@ -11,7 +11,8 @@ use App\Repositories\Eloquents\PackageUserRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
-
+use App\Http\Requests\StoreUserProductRequest;
+use App\Http\Requests\UpdateUserProductRequest;
 class UserProductController extends AdminController
 {
     protected $productService;
@@ -57,7 +58,7 @@ class UserProductController extends AdminController
             return redirect()->route('admin.packages.show',$id)->with('error','Vui lòng thử lại');
         }
     }
-    function store(Request $request){
+    function store(StoreUserProductRequest $request){
         try {
             $data = $request->except('_method','_token');
             $package_id = $request->package_id;
@@ -148,7 +149,7 @@ class UserProductController extends AdminController
             return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Vui lòng thử lại');
         }
     }
-    function update(Request $request,String $id){
+    function update(UpdateUserProductRequest $request,String $id){
         try {
             $item = $this->productService->find($id);
             $package_id = $item->package_id;

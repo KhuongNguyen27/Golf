@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/',function(){
+    return redirect()->route('admin.packages.index');
+});
 Route::group(['prefix'=>'admin','middleware' => 'preventhistory'],function(){
     //Products
     Route::resource('products', 'App\Http\Controllers\Admin\ProductController')->names('admin.products');
