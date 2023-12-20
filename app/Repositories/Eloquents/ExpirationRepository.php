@@ -30,4 +30,13 @@ class ExpirationRepository extends EloquentRepository implements ExpirationRepos
     function find($id){
         return $this->model->with('package_user')->find($id);
     } 
+    function destroy($id){
+        $expiration = $this->model->findOrFail($id);
+        $packages = PackageUser::find($expiration->packageuser_id);
+        $expirationDate = DateTime::createFromFormat('Y-m-d', $packages->expiration_date);
+        $expirationDate->sub(new DateInterval('P1D'));
+        $packages->expiration_date = $expirationDate->format('Y-m-d');
+        $packages->save();
+        return $expiration->delete();
+    }
 }
