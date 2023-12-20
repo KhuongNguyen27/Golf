@@ -81,9 +81,9 @@
                                         class='bx bx-bullseye'></i></a>
                                 @if($item->package_id != 4)
                                 <a href="{{ route('admin.expirations.create',$item->id) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
-                                        class='bx bx-plus'></i></a>
-                                @endif
+                                    class="btn btn-sm btn-icon btn-secondary" title="Gia hạn 1 ngày"><i
+                                        class='bx bx-expand-horizontal'></i>
+                                    @endif
                             </td>
                         </tr>
                         @endforeach

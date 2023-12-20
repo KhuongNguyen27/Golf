@@ -12,6 +12,12 @@
     </nav>
     <div class="d-md-flex align-items-md-start">
         <h1 class="page-title mr-sm-auto">Quản Lý Gia Hạn Thành Viên </h1>
+        <div class="btn-toolbar">
+            <a href="{{ route('admin.pdf.create',$item->id) }}" class="btn btn-primary mr-2" title="Xuất file PDF">
+                <i class='fa-solid bx bxs-file-export'></i>
+                <span class="ml-1">Xuất PDF</span>
+            </a>
+        </div>
     </div>
 </header>
 <div class="page-section">

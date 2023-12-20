@@ -14,7 +14,7 @@
         <h1 class="page-title mr-sm-auto">Quản Lý Lịch Sử Thành Viên </h1>
         <div class="btn-toolbar">
             <a href="{{ route('admin.pdf.create',$item->id) }}" class="btn btn-primary mr-2" title="Xuất file PDF">
-                <i class="fa-solid bx bx-plus"></i>
+                <i class='fa-solid bx bxs-file-export'></i>
                 <span class="ml-1">Xuất PDF</span>
             </a>
         </div>
