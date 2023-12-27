@@ -53,10 +53,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php $total_balls = 0; @endphp
                         @foreach($items as $item)
                         <tr>
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
                             <td>{{ $item->balls }} bóng</td>
+                            @php $total_balls += $item->balls; @endphp
                             <td>
                                 <a href="{{ route('admin.userproducts.edit',$item->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
@@ -72,6 +74,12 @@
                             </td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td>
+                                <h6>Tổng số bóng</h6>
+                            </td>
+                            <td>{{ $total_balls }} bóng</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

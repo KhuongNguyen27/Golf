@@ -69,7 +69,9 @@
                             @if($package->id == 2 || $package->id == 4)
                             <td>{{ $item->total_hour }}</td>
                             @endif
+                            @if($package->id !== 4)
                             <td>{{ $item->expiration_count }}</td>
+                            @endif
                             <td>{{ $item->rank_name }}</td>
                             <td>{!! $item->status_fm !!}</td>
                             <td>
