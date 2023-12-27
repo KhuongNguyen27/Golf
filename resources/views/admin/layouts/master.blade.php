@@ -70,6 +70,14 @@
     }
     gtag('js', new Date());
     gtag('config', 'UA-116692175-1');
+
+    var button = document.querySelector('.hamburger');
+    var appDiv = document.querySelector('.app');
+
+    function toggleClass() {
+        appDiv.classList.toggle('has-compact-menu');
+    }
+    button.addEventListener('click', toggleClass);
     </script>
 </body>
 

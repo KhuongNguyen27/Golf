@@ -22,13 +22,14 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'name' => 'required|max:20',
         ];
     }
     function messages(): array
     {
         return [
-            'name.required' => 'Vui lòng nhập tên'
+            'name.required' => 'Vui lòng nhập tên',
+            'name.max' => 'Tên tối đa 20 kí tự',
         ];
     }
 }

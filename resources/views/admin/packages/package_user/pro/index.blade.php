@@ -4,14 +4,14 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ route('admin.packages.show',$package_id) }}"><i
+                <a href="{{ route('admin.packageusers.index',$item->id) }}"><i
                         class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
                     Lại</a>
             </li>
         </ol>
     </nav>
     <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto">Quản Lý Lịch Sử Thành Viên </h1>
+        <h1 class="page-title mr-sm-auto">Quản Lý Lịch Sử Thành Viên {{ $item->user_name}}</h1>
         <div class="btn-toolbar">
             <a href="{{ route('admin.pdf.create',$item->id) }}" class="btn btn-primary mr-2" title="Xuất file PDF">
                 <i class='fa-solid bx bxs-file-export'></i>

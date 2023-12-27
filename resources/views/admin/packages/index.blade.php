@@ -41,7 +41,7 @@
                             <th>Tên</th>
                             <th>Giá tiền</th>
                             <th>Thời hạn</th>
-                            <th>Trạng thái</th>
+                            <!-- <th>Trạng thái</th> -->
                             <th>Thành viên</th>
                         </tr>
                     </thead>
@@ -49,14 +49,15 @@
                         @foreach($items as $item)
                         <tr>
                             <td>
-                                <a href="{{ route('admin.packages.show', $item->id) }}">{{ $item->name }}</a>
+                                <a
+                                    href="{{ route('admin.packageusers.index',['package_id' => $item->id ]) }}">{{ $item->name }}</a>
                                 </a>
                             </td>
                             <td>{{ number_format(intval($item->price), 0, ',', '.') }} VNĐ</td>
                             <td>{{ $item->duration_name }}</td>
-                            <td>{!! $item->status_fm !!}</td>
+                            <!-- <td>{!! $item->status_fm !!}</td> -->
                             <td>
-                                <a href="{{ route('admin.packages.show', $item->id) }}"
+                                <a href="{{ route('admin.packageusers.index',['package_id' => $item->id ]) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Xem thành viên"><i
                                         class='bx bx-group'></i></a>
                             </td>

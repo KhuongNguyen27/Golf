@@ -13,10 +13,14 @@ class UserProductRepository extends EloquentRepository implements UserProductRep
     {
         return UserProduct::class;
     }
-    public function store($data){
-        $item = PackageUser::where('package_id',$data['package_id'])->where('user_id',$data['user_id'])->first();
+    public function all($request = [])
+    {
+        return $this->model->where('package_user_id', $request->package_user_id)->orderBy('used_day','ASC')->get();
+    }
+    public function store($data)
+    {
+        $item = $data['item'];
         if (isset($data['is_3d']) && $data['is_3d'] === 'true') {
-            $item = PackageUser::where('package_id',$data['package_id'])->where('user_id',$data['user_id'])->first();
             if ($item->total_hour === null) {
                 $item->total_hour = $data['total_hour'];
             } else {
@@ -31,10 +35,8 @@ class UserProductRepository extends EloquentRepository implements UserProductRep
         $item->save();
         return $this->model->create($data);
     }
-    public function show($package_id, $user_id){
-        return $this->model->where('package_id', $package_id)->where('user_id', $user_id)->with('user')->orderBy('created_at','ASC')->get();
-    }
-    function destroy($id){
+    function destroy($id)
+    {
         $item = $this->model->findOrFail($id);
         $user_package = PackageUser::where('user_id',$item->user_id)->where('package_id',$item->package_id)->first();
         $user_package->used_numbers -= 1;

@@ -32,7 +32,10 @@ class PackageUser extends Model
         return $this->belongsTo(User::class);
     }
     function expiration(){
-        return $this->hasMany(Expiration::class,'packageuser_id','id');
+        return $this->hasMany(Expiration::class);
+    }
+    function user_product(){
+        return $this->hasMany(UserProduct::class);
     }
 
     //Feature
@@ -50,5 +53,14 @@ class PackageUser extends Model
     }
     function getRankNameAttribute(){
         return $this->rank ? $this->rank->name : "";
+    }
+    function getPackageNameAttribute(){
+        return $this->package ? $this->package->name : "";
+    }
+    function deleteExpiration($id){
+        Expiration::where('package_user_id', $id)->delete();
+    }
+    function deleteUserProduct($id){
+        UserProduct::where('package_user_id', $id)->delete();
     }
 }

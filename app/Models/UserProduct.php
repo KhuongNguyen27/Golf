@@ -16,7 +16,7 @@ class UserProduct extends Model
         'hour_to',
         'to_hour',
         'total_hour',
-        'created_at',
+        'used_day',
     ];
     //Relationship
     function user(){
@@ -24,6 +24,9 @@ class UserProduct extends Model
     }
     function package(){
         return $this->belongsTo(Package::class);
+    }
+    function package_user(){
+        return $this->belongsTo(PackageUser::class);
     }
 
     //Feature

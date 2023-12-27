@@ -12,8 +12,8 @@
     <div class="d-md-flex align-items-md-start">
         <h1 class="page-title mr-sm-auto">Quản Lý {{ $package->name }}</h1>
         <div class="btn-toolbar">
-            <a href="{{ route('admin.packages.create',['id' => $package->id]) }}" class="btn btn-primary mr-2"
-                title="Thêm mới thành viên">
+            <a href="{{ route($route_prefix.'create',['package_id' => $package->id]) }}" class="btn btn-primary mr-2"
+                title="Thêm mới khách hàng">
                 <i class="fa-solid bx bx-plus"></i>
                 <span class="ml-1">Thêm Mới</span>
             </a>
@@ -44,7 +44,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Tên thành viên</th>
+                            <th>Tên khách hàng</th>
                             <th>Ngày đăng kí</th>
                             <th>Ngày hết hạn</th>
                             <th>Lần sử dụng</th>
@@ -55,7 +55,7 @@
                             <th>Đã gia hạn</th>
                             @endif
                             <th>Xếp hạng</th>
-                            <th>Trạng thái</th>
+                            <!-- <th>Trạng thái</th> -->
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -73,19 +73,26 @@
                             <td>{{ $item->expiration_count }}</td>
                             @endif
                             <td>{{ $item->rank_name }}</td>
-                            <td>{!! $item->status_fm !!}</td>
-                            <td>
-                                <a href="{{ route('admin.userproducts.create',['user_id' => $item->user_id, 'package_id' => $package->id]) }}"
+                            <!-- <td>{!! $item->status_fm !!}</td> -->
+                            <td class="d-flex">
+                                <a href="{{ route('admin.userproducts.create',$item->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Thêm chi tiết"><i
                                         class='bx bx-plus'></i></a>
-                                <a href="{{ route('admin.userproducts.showuser',['user_id' => $item->user_id, 'package_id' => $package->id]) }}"
-                                    class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết"><i
+                                <a href="{{ route('admin.userproducts.index',$item->id) }}"
+                                    class="btn btn-sm btn-icon btn-secondary" title="Xem chi tiết sử dụng"><i
                                         class='bx bx-bullseye'></i></a>
                                 @if($item->package_id != 4)
                                 <a href="{{ route('admin.expirations.create',$item->id) }}"
                                     class="btn btn-sm btn-icon btn-secondary" title="Gia hạn 1 ngày"><i
-                                        class='bx bx-expand-horizontal'></i>
-                                    @endif
+                                        class='bx bx-expand-horizontal'></i></a>
+                                @endif
+                                <form action="{{ route($route_prefix.'destroy',$item->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-sm btn-icon btn-secondary"
+                                        onclick="return confirm('Bạn có muốn xóa {{ $item->user_name }} khỏi gói không ?')"
+                                        title="Xóa người dùng gói"><i class='bx bx-trash'></i></button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -27,12 +27,12 @@ class StoreUserProductRequest extends FormRequest
                 'hour_to' => 'required',
                 'to_hour' => 'required',
                 'total_hour' => 'required|numeric',
-                'created_at' => 'required',
+                'used_day' => 'required',
             ];
         }else{
             return [
                 'balls' => 'required|numeric',
-                'created_at' => 'required',
+                'used_day' => 'required',
             ];
         }
     }
@@ -45,7 +45,7 @@ class StoreUserProductRequest extends FormRequest
             'total_hour.numeric' => 'Số giờ phải là số',
             'balls.required' => 'Vui lòng số bóng',
             'balls.numeric' => 'Số bóng phải là số',
-            'created_at.required' => 'Vui lòng điền ngày',
+            'used_day.required' => 'Vui lòng điền ngày',
         ];
     }
 }

@@ -21,7 +21,7 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
     function orders(){
-        return $this->belongsToMany(Order::class,'orderdetails','order_id','product_id');
+        return $this->belongsToMany(Order::class,'orderdetails');
     }
     // Feature
     const ACTIVE = 1;

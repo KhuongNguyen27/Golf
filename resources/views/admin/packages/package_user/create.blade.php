@@ -4,19 +4,21 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">
-                <a href="{{ URL::previous() }}"><i class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay Lại</a>
+                <a href="{{ route($route_prefix.'index',$request->package_id) }}"><i
+                        class="breadcrumb-icon bx bx-arrow-back mr-2"></i>Quay
+                    Lại</a>
             </li>
         </ol>
     </nav>
     <h1 class="page-title">Thêm Thành Viên</h1>
 </header>
 <div class="page-section">
-    <form method="post" action="{{ route('admin.packages.store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route($route_prefix.'store') }}" enctype="multipart/form-data">
         @csrf
         <div class="card">
             <div class="card-body">
                 <legend>Thông tin cơ bản</legend>
-                <input type="hidden" name="package_id" value="{{$id}}">
+                <input type="hidden" name="package_id" value="{{$request->package_id}}">
                 <div class="form-group">
                     <div class="d-flex justify-content-between">
                         <label for="tf1">Tên Thành Viên <abbr name="Trường bắt buộc">*</abbr></label>

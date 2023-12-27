@@ -10,14 +10,14 @@ class Expiration extends Model
     use HasFactory;
     protected $table = 'expirations';
     protected $fillable = [
-        'packageuser_id',
+        'package_user_id',
         'expiration_date',
         'description',
         'created_at',
     ];
     // RelationShip
     function package_user(){
-        return $this->belongsTo(PackageUser::class,'packageuser_id','id');
+        return $this->belongsTo(PackageUser::class);
     }
     //Feature
 }

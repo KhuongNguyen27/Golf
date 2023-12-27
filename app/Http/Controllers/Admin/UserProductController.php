@@ -2,25 +2,65 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\UserProduct;
-use App\Models\PackageUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Repositories\Eloquents\UserProductRepository;
-use App\Repositories\Eloquents\PackageUserRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
+
+use App\Models\UserProduct;
+use App\Models\PackageUser;
+
+use App\Repositories\Eloquents\UserProductRepository;
+use App\Repositories\Eloquents\PackageUserRepository;
+
 use App\Http\Requests\StoreUserProductRequest;
 use App\Http\Requests\UpdateUserProductRequest;
+
 class UserProductController extends AdminController
 {
     protected $productService;
     protected $packageuserService;
+    protected $link_view = 'admin.packages.package_user.';
+    protected $route_prefix = 'admin.userproducts.';
     public function __construct(UserProductRepository $productService,PackageUserRepository $packageuserService)
     {
         $this->productService = $productService;
         $this->packageuserService = $packageuserService;
+    }
+    function index(Request $request){
+        try {
+            $package_user_id = $request->package_user_id;
+            $is_3D = $request->is_3D;
+            $item = $this->packageuserService->find($package_user_id);
+            $items = $this->productService->all($package_user_id);
+            $param=[
+                'is_3D' => $is_3D,
+                'items' => $items,
+                'item' => $item,
+            ];
+            switch ($package_id) {
+                case 1 :
+                    return view($this->link_view.'pro.index',$param);
+                    break;
+                case 2 :
+                    if ($is_3D) {
+                        return view($this->link_view.'single.index3D',$param);
+                    }else{
+                        return view($this->link_view.'single.index',$param);
+                    }
+                    break;
+                case 3 :
+                    return view($this->link_view.'session10.index',$param);
+                    break;
+                case 4 :
+                    return view($this->link_view.'hour35.index',$param);
+                    break;
+            }
+        } catch (\Exception $e) {
+            Log::error('Bug error : '.$e->getMessage());
+            return redirect()->route('admin.packageusers.index',$item->package_id)->with('error','Vui lòng thử lại');
+        }
     }
     function create3D(Request $request){
         $package_id = $request->package_id;
@@ -29,83 +69,46 @@ class UserProductController extends AdminController
                 'package_id' => $package_id,
                 'id'=> $id
             ];
-        return view('admin.packages.package_user.single.create3D',$param);
+        return view($this->link_view.'single.create3D',$param);
     }
     function create(Request $request){
         try {
-            $package_id = $request->package_id;
-            $id = $request->user_id;
+            $package_user_id = $request->package_user_id;
+            $item = $this->packageuserService->find($package_user_id);
             $param = [
-                'package_id' => $package_id,
-                'id'=> $id
+                'item' => $item,
+                'route_prefix' => $this->route_prefix
             ];
-            switch ($package_id) {
+            switch ($item->package_id) {
                 case 1 :
-                    return view('admin.packages.package_user.pro.create',$param);
+                    return view($this->link_view.'pro.create',$param);
                     break;
                 case 2 :
-                    return view('admin.packages.package_user.single.create',$param);
+                    return view($this->link_view.'single.create',$param);
                     break;
                 case 3 :
-                    return view('admin.packages.package_user.session10.create',$param);
+                    return view($this->link_view.'session10.create',$param);
                     break;
                 case 4 :
-                    return view('admin.packages.package_user.hour35.create',$param);
+                    return view($this->link_view.'hour35.create',$param);
                     break;
             }
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',$id)->with('error','Vui lòng thử lại');
+            return redirect()->route('admin.packageusers.index',$item->package_id)->with('error','Vui lòng thử lại');
         }
     }
     function store(StoreUserProductRequest $request){
         try {
             $data = $request->except('_method','_token');
-            $package_id = $request->package_id;
-            $user_id = $request->user_id;
+            $package_user_id = $data['package_user_id'];
+            $item = $this->packageuserService->find($package_user_id);
+            $data['item'] = $item;
             $this->productService->store($data);
-            return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Thêm thành công');
+            return redirect()->route($this->route_prefix.'index',$item->id)->with('error','Thêm thành công');
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Thêm thất bại');
-        }
-    }
-
-    function show(Request $request){
-        try {
-            $package_id = $request->package_id;
-            $user_id = $request->user_id;
-            $is_3D = $request->is_3D;
-            $item = PackageUser::where('user_id',$user_id)->where('package_id',$package_id)->first();
-            $items = $this->productService->show($package_id, $user_id);
-            $param=[
-                'package_id' => $package_id,
-                'user_id' => $user_id,
-                'is_3D' => $is_3D,
-                'items' => $items,
-                'item' => $item,
-            ];
-            switch ($package_id) {
-                case 1 :
-                    return view('admin.packages.package_user.pro.show',$param);
-                    break;
-                case 2 :
-                    if ($is_3D) {
-                        return view('admin.packages.package_user.single.show3D',$param);
-                    }else{
-                        return view('admin.packages.package_user.single.show',$param);
-                    }
-                    break;
-                case 3 :
-                    return view('admin.packages.package_user.session10.show',$param);
-                    break;
-                case 4 :
-                    return view('admin.packages.package_user.hour35.show',$param);
-                    break;
-            }
-        } catch (\Exception $e) {
-            Log::error('Bug error : '.$e->getMessage());
-            return redirect()->route('admin.packages.show',$package_id)->with('error','Vui lòng thử lại');
+            return redirect()->route($this->route_prefix.'index',$item->id)->with('error','Thêm thất bại');
         }
     }
     function edit($id){
@@ -118,16 +121,16 @@ class UserProductController extends AdminController
             ];
             switch ($package_id) {
                 case 1 :
-                    return view('admin.packages.package_user.pro.edit',$param);
+                    return view($this->link_view.'pro.edit',$param);
                     break;
                 case 2 :
-                    return view('admin.packages.package_user.single.edit',$param);
+                    return view($this->link_view.'single.edit',$param);
                     break;
                 case 3 :
-                    return view('admin.packages.package_user.session10.edit',$param);
+                    return view($this->link_view.'session10.edit',$param);
                     break;
                 case 4 :
-                    return view('admin.packages.package_user.hour35.edit',$param);
+                    return view($this->link_view.'hour35.edit',$param);
                     break;
             }
         } catch (\Exception $e) {
@@ -143,7 +146,7 @@ class UserProductController extends AdminController
             $param=[
                 'item' => $item
             ];
-            return view('admin.packages.package_user.single.edit3D',$param);
+            return view($this->link_view.'single.edit3D',$param);
         } catch (\Exception $e) {
             Log::error('Bug error : '.$e->getMessage());
             return redirect()->route('admin.userproducts.showuser',[$user_id,$package_id])->with('error','Vui lòng thử lại');
