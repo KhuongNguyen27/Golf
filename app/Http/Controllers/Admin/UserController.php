@@ -37,9 +37,9 @@ class UserController extends AdminController
     function store(StoreUserRequest $request){
         try {
             $data = $request->except(['_method','_token']);
-            $data['code'] = 'L'.rand(1,100);
+            $code = 'L'.rand(1,100);
             if ($request->hasFile('avatar')) {
-                $data['avatar'] = $this->uploadFile($request->file('avatar'), 'uploads/'.$data['code'].'/users');
+                $data['avatar'] = $this->uploadFile($request->file('avatar'), 'uploads/'.$code.'/users');
             }else {
                 $data['avatar'] = 'admin/assets/defaul.png';
             }

@@ -40,6 +40,7 @@ class UserProductRepository extends EloquentRepository implements UserProductRep
         $user_package->used_numbers -= 1;
         $user_package->total_hour -= $item->total_hour;
         $user_package->save();
+
         return $this->model->findOrFail($id)->delete();
     }
 }
