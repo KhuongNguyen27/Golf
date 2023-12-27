@@ -57,7 +57,7 @@
                                 </a>
                                 {{ $item->name }}
                             </td>
-                            <td>{{ \Carbon\Carbon::parse($item->birthday)->format('d/m/Y') }}</td>
+                            <td>{{ $item->birthday?\Carbon\Carbon::parse($item->birthday)->format('d/m/Y'):'' }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>
                                 <span class="sr-only">Edit</span></a> <a

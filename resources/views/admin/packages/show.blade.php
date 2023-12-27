@@ -49,7 +49,7 @@
                             <th>Ngày hết hạn</th>
                             <th>Lần sử dụng</th>
                             @if($package->id == 2 || $package->id == 4)
-                            <th>Thời gian sử dụng</th>
+                            <th>Thời gian sử dụng(Giờ)</th>
                             @endif
                             @if($package->id !== 4)
                             <th>Đã gia hạn</th>
